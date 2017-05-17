@@ -11,7 +11,9 @@
 
 import ParsePromise from './ParsePromise';
 // RN packager nonsense
-import { AsyncStorage } from 'react-native/Libraries/react-native/react-native.js';
+//import { AsyncStorage } from 'react-native/Libraries/react-native/react-native.js';
+// ejs see https://github.com/parse-community/Parse-SDK-JS/issues/342#issuecomment-298210459
+import { AsyncStorage } from 'react-native/Libraries/react-native/react-native-implementation.js'
 
 var StorageController = {
   async: 1,
