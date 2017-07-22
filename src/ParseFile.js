@@ -46,6 +46,14 @@ function b64Digit(number: number): string {
   throw new TypeError('Tried to encode large digit ' + number + ' in base64.');
 }
 
+function isFileType(data: object): bool {
+  if (process.env.PARSE_BUILD === 'react-native') {
+    return data.hasOwnProperty('uri');
+  }else {
+    return typeof File !== 'undefined' && data instanceof File;
+  }
+}
+
 /**
  * A Parse.File is a local representation of a file that is saved to the Parse
  * cloud.
@@ -94,7 +102,7 @@ export default class ParseFile {
           base64: ParseFile.encodeBase64(data),
           type: specifiedType
         };
-      } else if (typeof File !== 'undefined' && data instanceof File) {
+      } else if (isFileType(data)) {
         this._source = {
           format: 'file',
           file: data,
